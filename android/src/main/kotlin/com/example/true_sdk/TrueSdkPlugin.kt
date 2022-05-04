@@ -1,15 +1,13 @@
 package com.example.true_sdk
 
-import LoginActivity
-import android.content.Intent
 import androidx.annotation.NonNull
-import com.tdcm.truelifelogin.authentication.TrueIDSDK
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import java.util.*
 
 /** TrueSdkPlugin */
 class TrueSdkPlugin: FlutterPlugin, MethodCallHandler {
@@ -20,11 +18,13 @@ class TrueSdkPlugin: FlutterPlugin, MethodCallHandler {
     channel.setMethodCallHandler(this)
   }
 
-  override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-    if (call.method == "login") {}
+  override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+    TODO("Not yet implemented")
   }
 
-  override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-    channel.setMethodCallHandler(null)
+  override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
+    if (call.method == "login") {
+      LoginActivity().callLogin()
+    }
   }
 }
