@@ -49,4 +49,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'io.bitbucket.truedmp:trueid-sso-sdk:4.11.0'
+    implementation 'com.google.code.gson:gson:2.9.0'
 }
