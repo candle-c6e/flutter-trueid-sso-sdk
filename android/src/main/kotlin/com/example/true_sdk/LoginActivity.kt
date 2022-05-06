@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity(), LoginServiceListener {
         var sub = ""
         var jsonObj = Gson().fromJson(json ?: "", LoginModel::class.java)
         sub = jsonObj.sub
-        var loginModel = LoginModel(sub, token = accessToken)
+        var loginModel = LoginModel(sub, accessToken = accessToken)
         var encodeJson = Gson().toJson(loginModel)
         finishWithError(encodeJson)
     }
