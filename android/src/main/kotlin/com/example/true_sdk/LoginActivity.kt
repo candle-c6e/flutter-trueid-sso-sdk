@@ -15,10 +15,9 @@ import android.app.Activity
 
 
 class LoginActivity : AppCompatActivity(), LoginServiceListener {
-
     private val scope = listOf("public_profile", "mobile", "email", "references")
     private val redirectUrl = "https://www.trueid.net"
-    private var accessToken: String = ""
+    lateinit var service: LoginService
 
     private fun callLogin() {
         val language = "en"
@@ -28,9 +27,8 @@ class LoginActivity : AppCompatActivity(), LoginServiceListener {
         val environment = SDKEnvironment.STAGING
 
         try {
-            val service = LoginService(this, scope, redirectUrl, environment)
+            service = LoginService(this, scope, redirectUrl, environment)
             service.login(language, latitude, longitude, isAuto)
-            accessToken = service.accessToken?: ""
         } catch (e: Exception) {
             finishWithError("CANCEL_LOGIN")
         }
@@ -52,7 +50,7 @@ class LoginActivity : AppCompatActivity(), LoginServiceListener {
         var sub = ""
         var jsonObj = Gson().fromJson(json ?: "", LoginModel::class.java)
         sub = jsonObj.sub
-        var loginModel = LoginModel(sub, accessToken = accessToken)
+        var loginModel = LoginModel(sub, accessToken = service.accessToken)
         var encodeJson = Gson().toJson(loginModel)
         finishWithError(encodeJson)
     }
