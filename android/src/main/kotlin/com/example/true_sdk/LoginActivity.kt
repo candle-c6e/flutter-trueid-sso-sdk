@@ -14,8 +14,6 @@ import android.content.Intent
 import android.app.Activity
 
 
-
-
 class LoginActivity : AppCompatActivity(), LoginServiceListener {
 
     private val scope = listOf("public_profile", "mobile", "email", "references")
@@ -29,9 +27,13 @@ class LoginActivity : AppCompatActivity(), LoginServiceListener {
         val isAuto = true
         val environment = SDKEnvironment.STAGING
 
-        val service = LoginService(this, scope, redirectUrl, environment)
-        service.login(language, latitude, longitude, isAuto)
-        accessToken = service.accessToken
+        try {
+            val service = LoginService(this, scope, redirectUrl, environment)
+            service.login(language, latitude, longitude, isAuto)
+            accessToken = service.accessToken?: ""
+        } catch (e: Exception) {
+            finishWithError("CANCEL_LOGIN")
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +50,7 @@ class LoginActivity : AppCompatActivity(), LoginServiceListener {
 
     override fun onLoginSuccess(json: String?, expiresSecond: Int) {
         var sub = ""
-        var jsonObj = Gson().fromJson(json ?: "" , LoginModel::class.java)
+        var jsonObj = Gson().fromJson(json ?: "", LoginModel::class.java)
         sub = jsonObj.sub
         var loginModel = LoginModel(sub, token = accessToken)
         var encodeJson = Gson().toJson(loginModel)
@@ -66,7 +68,7 @@ class LoginActivity : AppCompatActivity(), LoginServiceListener {
     }
 
     override fun onCanceled() {
-        finish()
+        finishWithError("CANCEL_LOGIN")
     }
 
     override fun onFindTrueIDApp(isFound: Boolean) {
