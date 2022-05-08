@@ -1,8 +1,6 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:true_sdk/true_sdk.dart';
 
@@ -23,7 +21,7 @@ class _MyAppState extends State<MyApp> {
   Future<void> initPlatformState() async {
     String? token;
     try {
-      token = await TrueSdk.login ?? 'not auth';
+      token = await TrueSdk.login(isStaging: true) ?? 'not auth';
     } on PlatformException {
       token = 'Failed to get platform version.';
     }

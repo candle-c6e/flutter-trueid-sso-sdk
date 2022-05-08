@@ -26,7 +26,9 @@ class LoginActivity : AppCompatActivity(), LoginServiceListener {
         val isAuto = true
         var environment = SDKEnvironment.STAGING
 
-        if((intent.getStringExtra("stagging") ?: "") == "false") {
+        val isStaging = intent.getStringExtra("staging") ?: ""
+
+        if(isStaging == "false") {
             environment = SDKEnvironment.PRODUCTION
         }
 

@@ -5,15 +5,13 @@ import 'package:flutter/services.dart';
 class TrueSdk {
   static const MethodChannel _channel = MethodChannel('true_sdk');
 
-  static Future<dynamic> get login async {
+  static Future<dynamic> login({
+    isStaging = true,
+  }) async {
     Completer _completer = Completer();
     _channel.invokeMethod(
       'login',
-      [
-        {
-          "stagging": true,
-        }
-      ],
+      [isStaging],
     );
     _channel.setMethodCallHandler((call) async {
       switch (call.method) {

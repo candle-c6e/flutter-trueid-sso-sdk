@@ -28,7 +28,9 @@ class TrueSdkPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginReg
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
     this.result = result
     if (call.method == "login") {
+      val arguments = call.arguments as ArrayList<*>
       val intent = Intent(act, LoginActivity::class.java)
+      intent.putExtra("staging", arguments[0].toString())
       act?.startActivityForResult(intent, LOGIN_RESULT_CODE)
     } else {
       result.notImplemented()
