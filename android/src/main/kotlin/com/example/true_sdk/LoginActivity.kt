@@ -28,6 +28,9 @@ class LoginActivity : AppCompatActivity(), LoginServiceListener {
 
         try {
             service = LoginService(this, scope, redirectUrl, environment)
+            if(service.isLogin) {
+                service.logout()
+            }
             service.login(language, latitude, longitude, isAuto)
         } catch (e: Exception) {
             finishWithError("CANCEL_LOGIN")
@@ -56,7 +59,7 @@ class LoginActivity : AppCompatActivity(), LoginServiceListener {
     }
 
     override fun onLoginError(msg: String?) {
-        Log.d("onLoginError", msg.toString())
+        finishWithError("ERROR")
     }
 
     override fun onLogoutRespond(isSuccess: Boolean, json: String?) {
@@ -85,6 +88,7 @@ class LoginActivity : AppCompatActivity(), LoginServiceListener {
     }
 
     override fun onRegisterError(errorMessage: String?) {
+        finishWithError("ERROR")
     }
 
     override fun onForgotSuccess(loginCode: String?, clientId: String?) {
