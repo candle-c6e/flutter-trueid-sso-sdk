@@ -7,7 +7,14 @@ class TrueSdk {
 
   static Future<dynamic> get login async {
     Completer _completer = Completer();
-    _channel.invokeMethod('login');
+    _channel.invokeMethod(
+      'login',
+      [
+        {
+          "stagging": true,
+        }
+      ],
+    );
     _channel.setMethodCallHandler((call) async {
       switch (call.method) {
         case "emit":

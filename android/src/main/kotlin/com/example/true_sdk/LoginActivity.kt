@@ -24,7 +24,11 @@ class LoginActivity : AppCompatActivity(), LoginServiceListener {
         val latitude = "0.0"
         val longitude = "0.0"
         val isAuto = true
-        val environment = SDKEnvironment.STAGING
+        var environment = SDKEnvironment.STAGING
+
+        if((intent.getStringExtra("stagging") ?: "") == "false") {
+            environment = SDKEnvironment.PRODUCTION
+        }
 
         try {
             service = LoginService(this, scope, redirectUrl, environment)
