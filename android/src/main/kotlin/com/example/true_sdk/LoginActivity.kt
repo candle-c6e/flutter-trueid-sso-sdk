@@ -18,13 +18,13 @@ class LoginActivity : AppCompatActivity(), LoginServiceListener {
     private val scope = listOf("public_profile", "mobile", "email", "references")
     private val redirectUrl = "https://www.trueid.net"
     lateinit var service: LoginService
+    val language = "en"
+    val latitude = "0.0"
+    val longitude = "0.0"
+    val isAuto = true
+    var environment = SDKEnvironment.STAGING
 
     private fun callLogin() {
-        val language = "en"
-        val latitude = "0.0"
-        val longitude = "0.0"
-        val isAuto = true
-        var environment = SDKEnvironment.STAGING
 
         val isStaging = intent.getStringExtra("staging") ?: ""
 
@@ -36,8 +36,9 @@ class LoginActivity : AppCompatActivity(), LoginServiceListener {
             service = LoginService(this, scope, redirectUrl, environment)
             if(service.isLogin) {
                 service.logout()
+            } else {
+                service.login(language, latitude, longitude, isAuto)
             }
-            service.login(language, latitude, longitude, isAuto)
         } catch (e: Exception) {
             finishWithError("CANCEL_LOGIN")
         }
@@ -69,6 +70,7 @@ class LoginActivity : AppCompatActivity(), LoginServiceListener {
     }
 
     override fun onLogoutRespond(isSuccess: Boolean, json: String?) {
+        service.login(language, latitude, longitude, isAuto)
     }
 
     override fun onRefreshAccessToken(isSuccess: Boolean) {
