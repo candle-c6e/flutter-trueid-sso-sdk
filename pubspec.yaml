@@ -28,7 +28,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.example.true_sdk
+        package: com.trueidsso.flutterplugin
         pluginClass: TrueSdkPlugin
       ios:
         pluginClass: TrueSdkPlugin

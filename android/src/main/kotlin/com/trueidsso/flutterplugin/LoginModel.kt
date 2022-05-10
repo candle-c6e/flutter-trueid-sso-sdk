@@ -1,4 +1,4 @@
-package com.example.true_sdk
+package com.trueidsso.flutterplugin
 
 data class LoginModel(
         val sub: String,
