@@ -1,4 +1,4 @@
-package com.trueidsso.true_sdk
+package com.trueidsso.flutterplugin
 
 import android.app.Activity
 import android.content.Intent

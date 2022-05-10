@@ -5,7 +5,7 @@
     <application
         android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
         <activity
-            android:name="com.trueidsso.true_sdk.LoginActivity"/>
+            android:name="com.trueidsso.flutterplugin.LoginActivity"/>
     </application>
 
 </manifest>
