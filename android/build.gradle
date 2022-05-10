@@ -1,4 +1,4 @@
-group 'com.example.true_sdk'
+group 'com.trueidsso.flutterplugin'
 version '1.0-SNAPSHOT'
 
 buildscript {

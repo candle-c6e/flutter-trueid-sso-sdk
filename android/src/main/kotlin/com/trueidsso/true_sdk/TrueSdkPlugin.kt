@@ -1,4 +1,4 @@
-package com.example.true_sdk
+package com.trueidsso.true_sdk
 
 import android.app.Activity
 import android.content.Intent

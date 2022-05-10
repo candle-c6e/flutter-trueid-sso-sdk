@@ -1,4 +1,4 @@
-package com.example.true_sdk
+package com.trueidsso.true_sdk
 
 data class LoginModel(
         val sub: String,
