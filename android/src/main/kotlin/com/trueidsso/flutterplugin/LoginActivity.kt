@@ -1,4 +1,4 @@
-package com.example.true_sdk
+package com.trueidsso.flutterplugin
 
 import android.os.Bundle
 import android.util.Log
